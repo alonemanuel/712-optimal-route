@@ -1,7 +1,8 @@
 "use client";
 
-import { GoogleMap, useJsApiLoader, Marker, Polyline } from "@react-google-maps/api";
+import { GoogleMap, Marker, Polyline } from "@react-google-maps/api";
 import { useCallback, useState } from "react";
+import { useGoogleMaps } from "@/components/GoogleMapsProvider";
 import type { Route } from "@/lib/algorithm/types";
 
 const MAP_CENTER = { lat: 32.0853, lng: 34.7818 };
@@ -25,10 +26,7 @@ interface RouteMapProps {
 }
 
 export default function RouteMap({ route }: RouteMapProps) {
-  const { isLoaded, loadError } = useJsApiLoader({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? "",
-  });
-
+  const { isLoaded, loadError } = useGoogleMaps();
   const [, setMap] = useState<google.maps.Map | null>(null);
 
   const onLoad = useCallback((map: google.maps.Map) => {

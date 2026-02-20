@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
-import { generateMockSubmissions } from "@/lib/algorithm/mockData";
+import { getSubmissions } from "@/lib/mockStore";
 import { computeOptimalRoute } from "@/lib/algorithm/route";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
-  const submissions = generateMockSubmissions({ count: 80, seed: 42 });
+  const submissions = getSubmissions();
   const route = computeOptimalRoute(submissions);
 
   return NextResponse.json(route);
