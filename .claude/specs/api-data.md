@@ -145,6 +145,7 @@ CREATE TABLE submissions (
     email           TEXT NOT NULL,
     display_name    TEXT NOT NULL,
     address_text    TEXT NOT NULL,
+    inferred_address TEXT,                       -- normalized address from geocoding
     lat             REAL NOT NULL,
     lng             REAL NOT NULL,
     is_seed         INTEGER NOT NULL DEFAULT 0,   -- 1 = imported from Google Sheet
@@ -162,7 +163,8 @@ CREATE INDEX idx_submissions_coords ON submissions(lat, lng);
 | `google_user_id` | TEXT | NOT NULL, UNIQUE | Google `sub` claim. For seed data: `seed_<row>` |
 | `email` | TEXT | NOT NULL | Google email. For seed data: `seed_<row>@import.local` |
 | `display_name` | TEXT | NOT NULL | Google name. For seed data: column value or `"Rider <row>"` |
-| `address_text` | TEXT | NOT NULL | Raw address as entered/imported |
+| `address_text` | TEXT | NOT NULL | Raw address as entered by user (e.g., Hebrew text, abbreviations) |
+| `inferred_address` | TEXT | nullable | Canonical address from geocoding (e.g., "Solomon King Street 99, Tel Aviv-Yafo"). Allows showing users what address was understood. |
 | `lat` | REAL | NOT NULL | Geocoded latitude |
 | `lng` | REAL | NOT NULL | Geocoded longitude |
 | `is_seed` | INTEGER | NOT NULL, DEFAULT 0 | 1 if imported from CSV |
@@ -1287,6 +1289,7 @@ interface SubmissionResponse {
 interface SubmissionData {
   id: string;
   address_text: string;
+  inferred_address: string | null;
   lat: number;
   lng: number;
   created_at: string;

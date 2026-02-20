@@ -1,9 +1,9 @@
 import type { Submission } from "@/lib/algorithm/types";
-import { generateMockSubmissions } from "@/lib/algorithm/mockData";
+import { SEED_SUBMISSIONS } from "@/lib/seedData";
 
 /**
  * In-memory submission store for development.
- * Seeded with mock data on first access.
+ * Seeded with real user data from Tel Aviv on first access.
  * Replaced by Supabase in production.
  */
 
@@ -11,7 +11,12 @@ let submissions: Submission[] | null = null;
 
 function ensureSeeded(): Submission[] {
   if (submissions === null) {
-    submissions = generateMockSubmissions({ count: 80, seed: 42 });
+    // Convert seed submissions to algorithm format (id, lat, lng)
+    submissions = SEED_SUBMISSIONS.map(s => ({
+      id: s.id,
+      lat: s.lat,
+      lng: s.lng,
+    }));
   }
   return submissions;
 }

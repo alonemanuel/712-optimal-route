@@ -91,40 +91,48 @@ export default function RouteMap({ route }: RouteMapProps) {
         <Polyline path={polylinePath} options={POLYLINE_OPTIONS} />
       )}
 
-      {/* Stop markers with numbered labels */}
+      {/* Stop markers with styled icons */}
       {route?.stops.map((stop, i) => (
         <Marker
           key={`stop-${i}`}
           position={{ lat: stop.lat, lng: stop.lng }}
+          title={`${stop.label} (${stop.cluster_size} riders nearby)`}
+          icon={{
+            path: google.maps.SymbolPath.CIRCLE,
+            scale: 18,
+            fillColor: "#2563eb",
+            fillOpacity: 1,
+            strokeColor: "#1e40af",
+            strokeWeight: 2.5,
+          }}
           label={{
             text: String(i + 1),
             color: "#ffffff",
             fontWeight: "bold",
-            fontSize: "12px",
+            fontSize: "14px",
           }}
-          title={`${stop.label} (${stop.cluster_size} riders nearby)`}
         />
       ))}
 
-      {/* Endpoint marker (La Guardia / highway on-ramp) */}
+      {/* Endpoint marker (Highway on-ramp) */}
       {route && (
         <Marker
           key="endpoint"
           position={{ lat: route.endpoint.lat, lng: route.endpoint.lng }}
-          label={{
-            text: "E",
-            color: "#ffffff",
-            fontWeight: "bold",
-            fontSize: "12px",
-          }}
-          title="Endpoint: Highway on-ramp (La Guardia)"
+          title="End point: Highway on-ramp to Modi'in"
           icon={{
             path: google.maps.SymbolPath.CIRCLE,
-            scale: 14,
+            scale: 20,
             fillColor: "#dc2626",
             fillOpacity: 1,
-            strokeColor: "#991b1b",
-            strokeWeight: 2,
+            strokeColor: "#7f1d1d",
+            strokeWeight: 3,
+          }}
+          label={{
+            text: "END",
+            color: "#ffffff",
+            fontWeight: "bold",
+            fontSize: "11px",
           }}
         />
       )}
