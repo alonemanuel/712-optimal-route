@@ -41,7 +41,7 @@ A mobile-first single-page website with two views:
 ### Main Page — Map + Submit
 - Interactive Google Map showing the current proposed route through Tel Aviv
 - Route displayed as a polyline with stop markers (5–15 stops)
-- "Submit your address" form (Google auth required, one per person)
+- "Submit your address" form with Google Places Autocomplete (Google auth required, one per person)
 - When a user submits, the route recalculates (debounced — not on every single submission, batched with a short delay e.g., 30s–1min)
 - User can see how far they'd walk to the nearest proposed stop
 
@@ -61,7 +61,8 @@ A mobile-first single-page website with two views:
 |---|-------------|----------|
 | F1 | User can sign in with Google | Must |
 | F2 | Authenticated user can submit one Tel Aviv address | Must |
-| F3 | Address is geocoded to lat/lng | Must |
+| F3 | Address input uses Google Places Autocomplete (returns lat/lng with selection) | Must |
+| F3b | Seed data from Google Sheet is geocoded via Google Maps Geocoding API (free-text → lat/lng) | Must |
 | F4 | Optimal route is recalculated on new submissions (debounced) | Must |
 | F5 | Route is displayed on Google Maps with stop markers | Must |
 | F6 | User can see their walking distance to nearest stop | Should |

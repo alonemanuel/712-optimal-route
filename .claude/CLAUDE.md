@@ -6,15 +6,20 @@ A data-driven tool to optimize bus 712's Tel Aviv stops based on rider address d
 
 ```
 .claude/
+  README.md             # Documentation guide (start here for navigation)
   CLAUDE.md             # Project instructions (this file, loaded every session)
   settings.json         # Permissions and configuration
-  rules/                # Auto-loaded rule files (*.md)
-  skills/               # Reusable workflows and knowledge
-  prd/                  # Product requirement documents (versioned)
-  knowledge/            # Domain knowledge and research
+  backlog.md            # Current tasks and priorities
+  docs/                 # Core project docs (PRD, architecture, stack)
+  specs/                # Detailed implementation specs (UI, algorithm, API)
   history/              # Session summaries and decision log
-  stack/                # Tech stack choices and rationale
+  knowledge/            # Domain knowledge and research (grows over time)
+  skills/               # Reusable workflows (grows over time)
+  rules/                # Auto-loaded rule files (*.md)
+  archive/              # Old docs (not actively used)
 ```
+
+**See `README.md` for the full directory structure and navigation guide.**
 
 ## Working Style
 
@@ -26,40 +31,51 @@ A data-driven tool to optimize bus 712's Tel Aviv stops based on rider address d
 ## Session Start
 
 At the beginning of every session:
-1. Read the **current PRD** (highest version in `.claude/prd/`)
-2. Read **`.claude/backlog.md`** to understand current tasks and priorities
-3. Skim the **latest session summary** in `.claude/history/` for recent context
-4. If the user references a past decision, check `.claude/history/decisions.md`
+1. Read **`README.md`** to understand the documentation structure (first time only)
+2. Read **`docs/prd.md`** for the current product requirements
+3. Read **`backlog.md`** to understand current tasks and priorities
+4. Skim the **latest session summary** in `history/sessions/` for recent context
+5. If the user references a past decision, check `history/decisions.md`
+
+**Quick references:**
+- Architecture overview: `docs/architecture.md`
+- Tech stack: `docs/stack.md`
+- UI specs: `specs/ui-*.md`
+- Algorithm: `specs/algorithm.md`
+- API reference: `specs/api-data.md`
 
 ## PRD Versioning
 
-PRDs live in `.claude/prd/` and follow the naming convention `prd-v{N}-{DDMMYY}.md` (e.g., `prd-v0-200226.md`). The highest version number is the current PRD. Always read it at the start of a session to understand what we're building.
+The current PRD is at `docs/prd.md`. When requirements change significantly, create a new version:
+1. Move the current `docs/prd.md` to `archive/prd-versions/prd-v{N}-{DDMMYY}.md`
+2. Update `docs/prd.md` with the new requirements
+3. Update the version number at the top of the file
+4. Log the change in `history/decisions.md`
 
-When requirements change significantly, create a new version rather than editing the current one. Minor clarifications can be edited in-place.
+Minor clarifications can be edited in-place without versioning.
 
-**Current PRD:** `.claude/prd/prd-v0-200226.md`
+**Current PRD:** `docs/prd.md` (v0, created 2026-02-20)
 
 ## Knowledge Capture
 
-When you learn something during a session that would be useful in future sessions, **write it down** in `.claude/knowledge/`. This includes:
+When you learn something during a session that would be useful in future sessions, **write it down** in `knowledge/`. See `knowledge/README.md` for guidelines.
 
-- **Technical discoveries** — gotchas, API quirks, library behavior (e.g., `google-maps-api.md`)
-- **Domain knowledge** — bus route constraints, city rules, geographic facts (e.g., `tel-aviv-routes.md`)
-- **Debugging insights** — problems encountered and how they were solved (e.g., `debugging.md`)
-- **Research findings** — algorithm comparisons, benchmark results (e.g., `clustering-algorithms.md`)
+**What to capture:**
+- Technical discoveries — API quirks, library gotchas (e.g., `google-maps-hebrew.md`)
+- Domain knowledge — bus route constraints, geographic facts (e.g., `tel-aviv-neighborhoods.md`)
+- Debugging insights — recurring problems and solutions (e.g., `k-means-edge-cases.md`)
 
 **Rules:**
 - One file per topic. Use descriptive filenames.
-- Append to existing files when the topic already has a file.
-- Keep entries concise — future Claude sessions will read these.
-- Add a date header (`## 2026-02-20`) when appending to an existing file.
+- Append to existing files when the topic already exists (add date header).
+- Keep entries concise — future sessions will read these.
 - Don't document obvious things. Only capture what would save time if encountered again.
 
 ## Session History
 
 ### Session Summaries
 
-At the end of each session (or when the user signals they're done), write a summary to `.claude/history/sessions/DDMMYY-summary.md`. If multiple sessions happen on the same day, append `-N` (e.g., `200226-summary-2.md`).
+At the end of each session (or when the user signals they're done), write a summary to `history/sessions/DDMMYY-summary.md`. If multiple sessions happen on the same day, append `-N` (e.g., `200226-summary-2.md`).
 
 **Format:**
 ```markdown
@@ -80,7 +96,7 @@ At the end of each session (or when the user signals they're done), write a summ
 
 ### Decision Log
 
-When a significant technical or product decision is made, append it to `.claude/history/decisions.md`.
+When a significant technical or product decision is made, append it to `history/decisions.md`.
 
 **Format:**
 ```markdown
@@ -97,7 +113,7 @@ Only log decisions that would be non-obvious to a future reader. Don't log trivi
 
 ### Backlog
 
-`.claude/backlog.md` is the single source of truth for tasks. Structure:
+`backlog.md` is the single source of truth for tasks. Structure:
 
 ```markdown
 # Backlog
@@ -122,26 +138,15 @@ Only log decisions that would be non-obvious to a future reader. Don't log trivi
 
 ## Stack Documentation
 
-`.claude/stack/` documents technology choices. One file per major choice (e.g., `hosting.md`, `database.md`, `maps-api.md`, `frontend.md`).
+`docs/stack.md` documents all technology choices in one place. It includes:
+- Rationale for each choice
+- Alternatives considered
+- Free tier limits and constraints
+- Key decisions log
 
-**Format:**
-```markdown
-# [Technology Area]
+Update `docs/stack.md` when technologies are added or changed.
 
-**Chosen:** [Technology name and version]
-**Date:** YYYY-MM-DD
-
-## Why
-[Rationale for choosing this]
-
-## Alternatives considered
-[What else was evaluated and why it was rejected]
-
-## Notes
-[Setup quirks, limitations, free tier details, links]
-```
-
-Update stack docs when technologies are added or changed.
+For detailed technical implementation notes (e.g., API quirks, setup gotchas), add to `knowledge/` instead.
 
 ## Development
 
