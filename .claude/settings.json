@@ -4,8 +4,10 @@
   },
   "model": "haiku",
   "permissions": {
+    "defaultMode": "acceptEdits",
     "allow": [
       "Edit in /Users/alonemanuel/AlonPersonal/712-optimal-route",
+      "Write in /Users/alonemanuel/AlonPersonal/712-optimal-route",
       "Bash in /Users/alonemanuel/AlonPersonal/712-optimal-route"
     ],
     "ask": [

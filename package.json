@@ -1,0 +1,19 @@
+{
+  "name": "712-optimal-route",
+  "version": "1.0.0",
+  "description": "A data-driven tool to optimize bus route 712's Tel Aviv stops. Collects rider addresses, computes optimal stop placement using clustering, and visualizes the proposed route on an interactive map — for a proposal to the Modi'in mayor.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "vitest run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  }
+}

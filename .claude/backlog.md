@@ -240,6 +240,20 @@
 ---
 
 ## Done
+
+### Phase 1: Algorithm Core (LOCAL) — COMPLETE ✅ 2026-02-20
+- [x] Implement haversine distance function
+- [x] Implement coordinate projection (lat/lng ↔ x/y meters)
+- [x] Create mock data generator
+- [x] Implement preprocessing (dedup, outliers, validation)
+- [x] Implement k-means clustering (weighted)
+- [x] Implement TSP solver (Held-Karp exact DP)
+- [x] Implement route scoring function
+- [x] Implement main orchestrator
+- [x] Create end-to-end test harness
+- **Result:** 9 modules, 119/119 tests passing. Algorithm takes 100 submissions → generates optimal route with 5-15 stops.
+
+**Earlier:**
 - [x] Write initial PRD — 2026-02-20
 - [x] Set up Claude Code project structure — 2026-02-20
 - [x] Create comprehensive implementation plan — 2026-02-20
