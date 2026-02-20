@@ -2,9 +2,16 @@
   "env": {
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
-  "model": "sonnet",
+  "model": "haiku",
   "permissions": {
-    "allow": [],
+    "allow": [
+      "Edit in /Users/alonemanuel/AlonPersonal/712-optimal-route",
+      "Bash in /Users/alonemanuel/AlonPersonal/712-optimal-route"
+    ],
+    "ask": [
+      "Bash in /Users/alonemanuel/AlonPersonal/712-optimal-route (.*git.*|.*commit.*|.*push.*)"
+    ],
     "deny": []
   }
 }
+
